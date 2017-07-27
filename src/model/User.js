@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto';
 
-const UserSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const User = new Schema({
     username: {
         type: String,
         unique: true,
@@ -22,7 +24,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 
-UserSchema
+User
     .virtual('password')
     .set((password) => {
         if (password) {
@@ -34,14 +36,14 @@ UserSchema
         }
     });
 
-UserSchema
+/*User
     .virtual('id')
     .get(() => {
         return this._id.toString();
-    });
+    });*/
 
 
 
-export default mongoose.model('user', UserSchema);
+export default mongoose.model('user', User);
 
 

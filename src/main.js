@@ -10,11 +10,13 @@ import BasicRouter from './router/BasicRouter';
 import AuthRouter from './router/AuthRouter';
 import AuthController from './controller/AuthController';
 import UserService from './service/UserService';
+import RedisMockClient from './lib/MockRedisClient';
 
-const jwtRedis = new JWTRedis();
+const redisClient = new RedisMockClient();
+const jwtRedis = new JWTRedis(redisClient);
 const userService = new UserService({User});
 const passport = new Passport({userService});
-const authController = new AuthController({jwtRedis});
+const authController = new AuthController({jwtRedis, userService});
 const authRouter = new AuthRouter({authController, passport});
 const basicRouter = new BasicRouter({authRouter});
 const app = new App({passport, basicRouter});

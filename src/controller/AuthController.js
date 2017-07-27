@@ -1,15 +1,25 @@
-function AuthController({jwtRedis}) {
+import Promise from 'bluebird';
+import config from 'config';
+
+function AuthController({jwtRedis, userService}) {
+
+    const secret = config.get('jwt.secret');
 
     this.registration = (req, res, next) => {
-        return Promise
-            .all([
-                jwtRedis
-                    .sign(),
-                jwtRedis
-                    .sign()
-            ])
-            .spread((accessToken, refreshToken) => {
-                return res.status(200).json({accessToken, refreshToken});
+        return userService
+            .create({username: req.body.username, password: req.body.password})
+            .then((user) => {
+                return Promise
+                    .all([
+                        user,
+                        jwtRedis
+                            .sign({}, secret),
+                        jwtRedis
+                            .sign({}, secret)
+                    ])
+            })
+            .spread((user, accessToken, refreshToken) => {
+                return res.status(200).json({user, accessToken, refreshToken});
             })
             .catch(next);
     };
@@ -18,9 +28,9 @@ function AuthController({jwtRedis}) {
         return Promise
             .all([
                 jwtRedis
-                    .sign(),
+                    .sign({}, secret),
                 jwtRedis
-                    .sign()
+                    .sign({}, secret),
             ])
             .spread((accessToken, refreshToken) => {
                 return res.status(200).json({accessToken, refreshToken});
