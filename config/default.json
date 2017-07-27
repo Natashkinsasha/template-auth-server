@@ -1,0 +1,32 @@
+{
+  "server": {
+    "port": 3004
+  },
+  "version":"v1",
+  "level": "debug",
+  "mongoDb": {
+    "user": "admin",
+    "password": "admin",
+    "host": "@ds151070.mlab.com",
+    "port": "51070",
+    "db": "garage"
+  },
+  "endpoint": "api/v1",
+  "session": {
+    "name": "session",
+    "secret": "secret",
+    "keys": [
+      "sid"
+    ],
+    "cookie": {
+      "httpOnly": true,
+      "maxAge": null,
+      "path": "/"
+    }
+  },
+  "jwt":{
+    "secret":"secret"
+  },
+  "FACEBOOK_APP_ID":"456203928064750",
+  "FACEBOOK_APP_SECRET":"74727a95a18162c22ba05877b6a36c1f"
+}

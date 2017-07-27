@@ -1,0 +1,36 @@
+{
+  "name": "template-auth-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "set NODE_ENV=localhost&& nodemon --promise=bluebird src/main.js --exec babel-node",
+    "test": "set NODE_ENV=test&& mocha --compilers js:babel-register test/**/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "config": "^1.26.1",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.2",
+    "crypto": "0.0.3",
+    "express": "^4.15.3",
+    "express-validator": "^3.2.1",
+    "express-winston": "^2.4.0",
+    "helmet": "^3.8.0",
+    "jwt-redis": "^0.1.4",
+    "mongoose": "^4.11.4",
+    "mongoose-findorcreate": "^2.0.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-local": "^1.0.0",
+    "ramda": "^0.24.1",
+    "winston": "^2.3.1"
+  }
+}
